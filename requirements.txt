@@ -1,0 +1,1 @@
+-e git+https://github.com/devartis/passbook.git#cdd500d67e8dd007d83133cbd890e4fdd5b038e5#egg=passbook
