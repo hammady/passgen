@@ -9,3 +9,8 @@ RUN apt update && \
 RUN pip install --upgrade pip
 COPY requirements.txt /home
 RUN pip install -r requirements.txt
+
+COPY / /home/
+CMD ["/home/app.py"]
+
+EXPOSE 3000

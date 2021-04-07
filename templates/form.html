@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'default.css') }}">
+        <title>Event Registration Form</title>
+    </head>
+    <body style="overflow-x: hidden;">
+    <form class="jotform-form" action="/generate" method="get" accept-charset="utf-8" autocomplete="on" novalidate="true">
+      <div role="main" class="form-all">
+        <ul class="form-section page-section">
+          <li id="cid_1" class="form-input-wide" data-type="control_head">
+            <div class="form-header-group  header-large">
+              <div class="header-text httal htvam">
+                <h1 id="header_1" class="form-header" data-component="header">
+                  Event Registration Form
+                </h1>
+                <div id="subHeader_1" class="form-subHeader">
+                  Fill out this form using your phone then click on the buttons below to generate Apple Wallet and Google Play passes.
+                  The passes will automatically be shown on the phone lock screen once the location and time are approached.
+                  No more lining up, unlocking the phone (miss face unlocking with mask?), and looking for that email with the QR code!
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="form-line" data-type="control_textbox" id="id_47">
+            <label class="form-label form-label-top form-label-auto" id="label_47" for="input_47"> Attendee Name </label>
+            <div id="cid_47" class="form-input-wide" data-layout="half">
+              <input type="text" id="input_47" name="attendeeName" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_47">
+            </div>
+          </li>
+          <li class="form-line form-line-column form-col-1" data-type="control_textbox" id="id_14">
+            <label class="form-label form-label-top" id="label_14" for="input_14"> Venue </label>
+            <div id="cid_14" class="form-input-wide" data-layout="half">
+              <input type="text" id="input_14" name="venue" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" placeholder=" " data-component="textbox" aria-labelledby="label_14">
+            </div>
+          </li>
+          <li class="form-line form-line-column form-col-1" data-type="control_textbox" id="id_104">
+            <label class="form-label form-label-top" id="label_104" for="input_104"> Location </label>
+            <div id="cid_104" class="form-input-wide" data-layout="half">
+              <input type="text" id="input_104" name="location" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" placeholder="latitude,longitude" data-component="textbox" aria-labelledby="label_104">
+            </div>
+          </li>
+          <li class="form-line form-line-column form-col-1" data-type="control_textbox" id="id_105">
+            <label class="form-label form-label-top" id="label_105" for="input_105"> Date </label>
+            <div id="cid_105" class="form-input-wide" data-layout="half">
+              <input type="text" id="input_105" name="date" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" placeholder="YYYY-MM-DD" data-component="textbox" aria-labelledby="label_105">
+            </div>
+          </li>
+          <li class="form-line form-line-column form-col-1" data-type="control_textbox" id="id_106">
+            <label class="form-label form-label-top" id="label_106" for="input_106"> Time </label>
+            <div id="cid_106" class="form-input-wide" data-layout="half">
+              <input type="text" id="input_106" name="time" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" placeholder="HH:MM" data-component="textbox" aria-labelledby="label_106">
+            </div>
+          </li>
+          <li class="form-line form-line-column form-col-1" data-type="control_textbox" id="id_107">
+            <label class="form-label form-label-top" id="label_107" for="input_107"> Time Zone </label>
+            <div id="cid_107" class="form-input-wide" data-layout="half">
+              <input type="text" id="input_107" name="timeZone" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" placeholder="Example: -04:00" data-component="textbox" aria-labelledby="label_107">
+            </div>
+          </li>
+          <li class="form-line" data-type="control_textarea" id="id_45">
+            <label class="form-label form-label-top form-label-auto" id="label_45" for="input_45"> QR Code Text </label>
+            <div id="cid_45" class="form-input-wide" data-layout="full">
+              <textarea id="input_45" class="form-textarea" name="qrCode" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_45"></textarea>
+            </div>
+          </li>
+          <li class="form-line" data-type="control_textbox" id="id_47">
+            <label class="form-label form-label-top form-label-auto" id="label_400" for="input_400"> API Key (optional) </label>
+            <div id="cid_400" class="form-input-wide" data-layout="half">
+              <input type="password" id="input_400" name="apiKey" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_400" placeholder="Leaving empty generates a demo code">
+            </div>
+          </li>
+          <input type="hidden" name="passType" value="apple"/>
+          <li class="form-line form-line-column form-col-1" data-type="control_button" id="id_20">
+            <div id="cid_20" class="form-input-wide" data-layout="full">
+              <div data-align="left" class="form-buttons-wrapper form-buttons-left   jsTest-button-wrapperField">
+                <input type="image" value="apple" src="{{ url_for('static', filename = 'wallet.png') }}" alt="Add to Apple Wallet" height="48px"/>
+              </div>
+            </div>
+          </li>
+          <li class="form-line form-line-column form-col-1" data-type="control_button" id="id_20">
+            <div id="cid_20" class="form-input-wide" data-layout="full">
+              <div data-align="left" class="form-buttons-wrapper form-buttons-right   jsTest-button-wrapperField">
+                <input type="image" value="google" src="{{ url_for('static', filename = 'gpay.png') }}" alt="Add to Google Pay" height="48px"
+                onclick="alert('Coming soon!'); return false"/>
+              </div>
+            </div>
+          </li>
+          <li class="form-line" data-type="control_textbox">
+            <label class="form-label form-label-top form-label-auto"> Contact me at: <a href="mailto:passgen@hammady.net">passgen@hammady.net</a> </label>
+          </li>
+          <li style="clear:both">
+          </li>
+        </ul>
+      </div>
+      <div class="formFooter-heightMask">
+      </div>
+      <div class="formFooter f6">
+        <div class="formFooter-wrapper formFooter-leftSide">
+          <a href="https://www.jotform.com/?utm_source=formfooter&amp;utm_medium=banner&amp;utm_term=210955163582256&amp;utm_content=jotform_logo&amp;utm_campaign=powered_by_jotform_le" target="_blank" class="formFooter-logoLink"><img class="formFooter-logo" src="https://cdn.jotfor.ms/assets/img/logo/logo-new@1x.png" alt="Jotform Logo"></a>
+        </div>
+        <div class="formFooter-wrapper formFooter-rightSide">
+          <span class="formFooter-text">
+            Now create your own JotForm - It's free!
+          </span>
+          <a class="formFooter-button" href="https://www.jotform.com/?utm_source=formfooter&amp;utm_medium=banner&amp;utm_term=210955163582256&amp;utm_content=jotform_button&amp;utm_campaign=powered_by_jotform_le" target="_blank">Create your own JotForm</a>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
