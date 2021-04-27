@@ -4,6 +4,7 @@ Web service for generating location/time aware Apple Wallet passes.
 ## System requirements
 
 - [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/) (optional)
 
 ## Required Configuration
 
@@ -38,6 +39,16 @@ An example `api_keys.yaml` can be found in the root of this repo (`api_keys-exam
 
 ## Development
 
+### With Docker Compose
+
+If you do not have Docker Compose installed, skip to the next section.
+
+```bash
+docker-compose up --build
+```
+
+Then navigate to http://localhost:3000.
+
 ### Build
 
 ```bash
@@ -54,6 +65,8 @@ docker run -it \
   -e SKIP_DOWNLOAD_SECRETS=1 \
   -p 3000:3000 --rm passgen:1
 ```
+
+Then navigate to http://localhost:3000.
 
 ## Production
 
@@ -74,4 +87,40 @@ docker run -d \
   -e AWS_SECRET_ACCESS_KEY=<VALUE> \
   -e AWS_BUCKET=<VALUE> \
   -p 3000:3333 -e PORT=3333 --rm passgen:prod
+```
+
+Then navigate to http://localhost:3000.
+
+### Heroku
+
+Basically, you need to create a heroku app, set up environment variables and set
+the stack to container:
+
+```bash
+heroku stack:set container
+```
+
+Finally link your repository to heroku and set up automatic builds.
+For more information please refer to the official docs
+[here](Follow this [guide](https://devcenter.heroku.com/categories/deploying-with-docker).
+
+### Docker Swarm
+
+Assuming you have a swarm cluster:
+
+1. Deploy the secrets
+
+```bash
+docker secret create private.key.1 /path/to/private.key
+docker secret create certificate.pem.1 /path/to/certificate.pem
+docker secret create apple-wwdrca.pem.1 /path/to/apple-wwdrca
+docker secret create api_keys.yaml.1 /path/to/api_keys.yaml
+```
+
+2. Deploy the stack
+
+With the correct tag set in `docker-compose.yaml`, run the following:
+
+```bash
+docker stack deploy -c docker-compose.yaml passgen
 ```

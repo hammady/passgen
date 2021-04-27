@@ -1,0 +1,30 @@
+version: '3.8'
+services: 
+  passgen:
+    image: hammady/passgen:latest
+    build: .
+    environment: 
+      - APPLE_PRIVATE_KEY_PASSWORD=
+      - APPLE_PASS_TYPE_IDENTIFIER=
+      - APPLE_TEAM_IDENTIFIER=
+      - SKIP_DOWNLOAD_SECRETS=1
+    ports:
+      - 3000:3000
+    secrets:
+      - source: private.key.1
+        target: /home/certs/private.key
+      - source: certificate.pem.1
+        target: /home/certs/certificate.pem
+      - source: apple-wwdrca.pem.1
+        target: /home/certs/apple-wwdrca.pem
+      - source: api_keys.yaml.1
+        target: /home/api_keys.yaml
+secrets:
+  private.key.1:
+    external: true
+  certificate.pem.1:
+    external: true
+  apple-wwdrca.pem.1:
+    external: true
+  api_keys.yaml.1:
+    external: true
