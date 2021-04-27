@@ -102,7 +102,7 @@ heroku stack:set container
 
 Finally link your repository to heroku and set up automatic builds.
 For more information please refer to the official docs
-[here](Follow this [guide](https://devcenter.heroku.com/categories/deploying-with-docker).
+[here](https://devcenter.heroku.com/categories/deploying-with-docker).
 
 ### Docker Swarm
 
