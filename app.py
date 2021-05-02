@@ -43,15 +43,21 @@ def root_html():
 
 @app.route('/generate', methods=['GET'])
 def generate():
+    def format_time(date, time, time_zone):
+        time_str = '{}T{}:00{}'.format(date, time, time_zone)
+        return datetime.fromisoformat(time_str)
+
     # handle api key
     api_key = request.args.get('apiKey')
     organization_name = get_organization_name(api_key)
     venue = request.args.get('venue')
-    time = '{}T{}:00{}'.format(request.args.get('date'), request.args.get('time'), request.args.get('timeZone'))
-    time = datetime.fromisoformat(time)
+    date = request.args.get('date')
+    time_zone = request.args.get('timeZone')
+    start_time = format_time(date, request.args.get('start_time'), time_zone)
+    end_time = format_time(date, request.args.get('end_time'), time_zone)
     allowed_message = get_message(api_key, request.args.get('qrCode'))
     if allowed_message == None:
-        allowed_message = 'Demo barcode, please contact me to get an API key. Venue is {} at {} anyway'.format(venue, time)
+        allowed_message = 'Demo barcode, please contact me to get an API key. Venue is {} at {} anyway'.format(venue, start_time)
     latitude, longitude = request.args.get('location').split(',')
 
     output = passgen.generate(
@@ -61,7 +67,8 @@ def generate():
         message=allowed_message,
         latitude=float(latitude),
         longitude=float(longitude),
-        time=time)
+        start_time=start_time,
+        end_time=end_time)
 
     return send_file(
         output,

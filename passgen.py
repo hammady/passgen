@@ -14,14 +14,14 @@ class Passgen():
         self._team_identifier = team_identifier
 
     # returns BytesIO
-    def generate(self, name, venue, organization_name, message, latitude, longitude, time):
-        print('Generating: name:%s, venue:%s, organization_name:%s, message:%s, latitude:%f, longitude:%f, time:%s' % \
-            (name, venue, organization_name, message, latitude, longitude, time))
-        time_str = time.strftime('%c %Z')
+    def generate(self, name, venue, organization_name, message, latitude, longitude, start_time, end_time):
+        print('Generating: name:%s, venue:%s, organization_name:%s, message:%s, latitude:%f, longitude:%f, start_time:%s, end_time:%s' % \
+            (name, venue, organization_name, message, latitude, longitude, start_time, end_time))
+        start_time_str = start_time.strftime('%c %Z')
         cardInfo = EventTicket()
         cardInfo.addPrimaryField('name', name, 'Name')
         cardInfo.addSecondaryField('venue', venue, 'Venue')
-        cardInfo.addAuxiliaryField('time', time_str, 'Time')
+        cardInfo.addAuxiliaryField('start_time', start_time_str, 'Start Time')
         cardInfo.addBackField('org', organization_name, 'Organizer')
 
         passfile = Pass(cardInfo, \
@@ -33,7 +33,8 @@ class Passgen():
         location = Location(latitude=latitude, longitude=longitude)
         location.relevantText = "Swipe to show barcode"
         passfile.locations = [location]
-        passfile.relevantDate = datetime.isoformat(time)
+        passfile.relevantDate = datetime.isoformat(start_time)
+        passfile.expirationDate = datetime.isoformat(end_time)
 
         # Including the icon and logo is necessary for the passbook to be valid.
         passfile.addFile('icon.png', open('images/mnn.png', 'rb'))
