@@ -26,7 +26,8 @@ The `APPLE_*` variables can be obtained by following the guide at
 
 The `AWS_*` variables are required to download Apple secrets and the `api_keys.yaml`
 from AWS S3. During development, you only need to download them once,
-or just use local files. In this case just set `SKIP_DOWNLOAD_SECRETS` to any non-empty value.
+or just use local files (place them in the `./secrets` folder).
+In this case just set `SKIP_DOWNLOAD_SECRETS` to any non-empty value.
 
 The following files should exist on the AWS bucket under the configured prefix (leave empty if on root):
 

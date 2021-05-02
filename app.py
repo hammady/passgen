@@ -16,24 +16,24 @@ def download_secret_files():
         s3.download_file(env['AWS_BUCKET'], '{}{}'.format(env.get('AWS_SECRETS_PREFIX', ''), key), path)
 
     s3 = boto_client('s3')
-    download_secret_file(s3, 'private.key', './certs/private.key')
-    download_secret_file(s3, 'certificate.pem', './certs/certificate.pem')
-    download_secret_file(s3, 'apple-wwdrca.pem', './certs/apple-wwdrca.pem')
-    download_secret_file(s3, 'api_keys.yaml', './api_keys.yaml')
+    download_secret_file(s3, 'private.key', './secrets/private.key')
+    download_secret_file(s3, 'certificate.pem', './secrets/certificate.pem')
+    download_secret_file(s3, 'apple-wwdrca.pem', './secrets/apple-wwdrca.pem')
+    download_secret_file(s3, 'api_keys.yaml', './secrets/api_keys.yaml')
 
 if not env.get('SKIP_DOWNLOAD_SECRETS'):
     print('Downloading secrets from AWS S3...')
     download_secret_files()
     print('Done')
 
-with open('./api_keys.yaml', 'r') as f:
+with open('./secrets/api_keys.yaml', 'r') as f:
     api_keys = yaml_load(f)
 
 passgen = Passgen(
-    private_key='./certs/private.key',
+    private_key='./secrets/private.key',
     private_key_password=env['APPLE_PRIVATE_KEY_PASSWORD'],
-    certificate='./certs/certificate.pem',
-    wwdrca='./certs/apple-wwdrca.pem',
+    certificate='./secrets/certificate.pem',
+    wwdrca='./secrets/apple-wwdrca.pem',
     pass_type_identifier=env['APPLE_PASS_TYPE_IDENTIFIER'],
     team_identifier=env['APPLE_TEAM_IDENTIFIER'])
 

@@ -12,13 +12,13 @@ services:
       - 3000:3000
     secrets:
       - source: private.key.1
-        target: /home/certs/private.key
+        target: /home/secrets/private.key
       - source: certificate.pem.1
-        target: /home/certs/certificate.pem
+        target: /home/secrets/certificate.pem
       - source: apple-wwdrca.pem.1
-        target: /home/certs/apple-wwdrca.pem
+        target: /home/secrets/apple-wwdrca.pem
       - source: api_keys.yaml.1
-        target: /home/api_keys.yaml
+        target: /home/secrets/api_keys.yaml
 secrets:
   private.key.1:
     external: true
