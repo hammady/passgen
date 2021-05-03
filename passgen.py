@@ -14,9 +14,9 @@ class Passgen():
         self._team_identifier = team_identifier
 
     # returns BytesIO
-    def generate(self, name, venue, organization_name, message, latitude, longitude, start_time, end_time):
-        print('Generating: name:%s, venue:%s, organization_name:%s, message:%s, latitude:%f, longitude:%f, start_time:%s, end_time:%s' % \
-            (name, venue, organization_name, message, latitude, longitude, start_time, end_time))
+    def generate(self, name, venue, organization_name, message, latitude, longitude, start_time, end_time, icon=None):
+        print('Generating: name:%s, venue:%s, organization_name:%s, message:%s, latitude:%f, longitude:%f, start_time:%s, end_time:%s, icon:%s' % \
+            (name, venue, organization_name, message, latitude, longitude, start_time, end_time, icon))
         start_time_str = start_time.strftime('%c %Z')
         cardInfo = EventTicket()
         cardInfo.addPrimaryField('name', name, 'Name')
@@ -37,8 +37,11 @@ class Passgen():
         passfile.expirationDate = datetime.isoformat(end_time)
 
         # Including the icon and logo is necessary for the passbook to be valid.
-        passfile.addFile('icon.png', open('images/mnn.png', 'rb'))
-        passfile.addFile('logo.png', open('images/mnn.png', 'rb'))
+        icon_file = 'images/passgen.png'
+        if icon:
+            icon_file = 'images/{}'.format(icon)
+        passfile.addFile('icon.png', open(icon_file, 'rb'))
+        passfile.addFile('logo.png', open(icon_file, 'rb'))
 
         # Create and output the Passbook file (.pkpass)
         output = passfile.create(self._certificate, self._private_key, self._wwdrca, self._private_key_password)

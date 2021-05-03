@@ -118,7 +118,13 @@ docker secret create apple-wwdrca.pem.1 /path/to/apple-wwdrca
 docker secret create api_keys.yaml.1 /path/to/api_keys.yaml
 ```
 
-2. Deploy the stack
+2. Deploy the configs  (to override the generated passes icon)
+
+```bash
+docker config create icon.png.1 /path/to/icon.png
+```
+
+3. Deploy the stack
 
 With the correct tag set in `docker-compose.yaml`, run the following:
 

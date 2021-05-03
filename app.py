@@ -50,6 +50,7 @@ def generate():
     # handle api key
     api_key = request.args.get('apiKey')
     organization_name = get_organization_name(api_key)
+    icon = get_icon(api_key)
     venue = request.args.get('venue')
     date = request.args.get('date')
     time_zone = request.args.get('timeZone')
@@ -68,7 +69,8 @@ def generate():
         latitude=float(latitude),
         longitude=float(longitude),
         start_time=start_time,
-        end_time=end_time)
+        end_time=end_time,
+        icon=icon)
 
     return send_file(
         output,
@@ -86,6 +88,13 @@ def get_organization_name(api_key):
 def get_message(api_key, message):
     if api_keys.get(api_key):
         return message
+    else:
+        return None
+
+def get_icon(api_key):
+    data = api_keys.get(api_key)
+    if data:
+        return data.get('image')
     else:
         return None
 

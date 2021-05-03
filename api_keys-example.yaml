@@ -1,2 +1,3 @@
 api_key_here:
   org: Organization name here
+  image: filename_under_images
