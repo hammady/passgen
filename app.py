@@ -37,6 +37,10 @@ passgen = Passgen(
     pass_type_identifier=env['APPLE_PASS_TYPE_IDENTIFIER'],
     team_identifier=env['APPLE_TEAM_IDENTIFIER'])
 
+@app.route('/healthz')
+def health():
+    return 'OK'
+
 @app.route('/')
 def root_html():
     return render_template('form.html')

@@ -22,6 +22,12 @@ services:
     configs:
       - source: icon.png.1
         target: /home/images/passgen.png
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:3000/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 secrets:
   private.key.1:
     external: true
